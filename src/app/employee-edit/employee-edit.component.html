@@ -1,0 +1,39 @@
+<form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm.value)" >
+    Need to update Employee Id {{emp_id.id}}
+  <div class="form-group">
+    <label>Name:</label>
+    <input type='text' style="width:250px" #ename="ngModel"  [class.is-invalid] = 'ename.invalid && ename.touched' [(ngModel)]="name" required class='form-control' name='ename'/>
+    <small class='text-danger' [class.d-none]="ename.valid || ename.untouched">Name is required</small>
+  </div>
+  
+  <div class="form-group">
+    <label>Phone:</label>
+    <input type='text' style="width:250px" #ephone="ngModel" [class.is-invalid] = 'ephone.invalid && ephone.touched' pattern="^\d{10}$" [(ngModel)]="phone" required class='form-control' name='ephone'/>
+    
+    <div *ngIf="ephone.errors && (ephone.invalid || ephone.touched)">
+      <small class='text-danger' [class.d-none]="ephone.valid || ephone .untouched" *ngIf="ephone.errors.required">Phone number is required</small>
+      <small class='text-danger' *ngIf="ephone.errors.pattern">Phone number must be 10 digit</small>
+    </div>
+  </div>
+  <div ngModelGroup='address'>
+    <div class="form-group">
+      <label>Address 1:</label>
+      <input type='text' style="width:250px" class='form-control' ngModel name='eaddress1'/>
+    </div>
+    <div class="form-group">
+      <label>Address 2:</label>
+      <input type='text' style="width:250px" class='form-control' ngModel name='eaddress2'/>
+    </div>
+    <div class="form-group">
+      <label>City:</label>
+      <input type='text' style="width:250px" class='form-control' ngModel name='ecity'/>
+    </div>
+    <div class="form-group">
+      <label>Postal Code:</label>
+      <input type='text' style="width:250px" class='form-control' ngModel name='epostal'/>
+    </div>
+  </div>
+  <div>
+    <button type="submit" [disabled]="employeeForm.form.invalid"  class="btn btn-primary">Save Data</button>
+  </div>                            
+</form>

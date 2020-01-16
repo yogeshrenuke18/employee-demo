@@ -1,0 +1,27 @@
+<button name='Add' (click)='addEmployee()'>ADD NEW</button>
+<div class="form-group"> 
+  <input type='text' class="form-control" placeholder="Search" style="width:250px" [(ngModel)]='searchText'/>
+</div>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>City</th>
+    <th>Address 1 </th>
+    <th>Address 2</th>
+    <th>Postal Code</th>
+    <th>Edit</th>
+  </tr>
+  <tr *ngFor='let employee of employee_data | employeeFilter : searchText'>
+    <td>{{employee.id}}</td>
+    <td>{{employee.name}}</td>
+    <td>{{employee.phone}}</td>
+    <td>{{employee.address.city}}</td>
+    <td>{{employee.address.address_line1}}</td>
+    <td>{{employee.address.address_line2}}</td>
+    <td>{{employee.address.postal_code}}</td>
+    <td><a [routerLink]="['edit', employee.id]" routerLinkActive="active">Edit</a></td>
+  </tr>
+</table>
+<router-outlet></router-outlet>
